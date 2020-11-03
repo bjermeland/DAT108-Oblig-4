@@ -30,7 +30,7 @@
 						<label for="etternavn">Etternavn</label> <input name="etternavn"
 							type="text" class="form-control" id="etternavn"
 							placeholder="Etternavn" required minlength="2" maxlength="20"
-							pattern="[A-Z][a-z0-9_-]*" />
+							pattern="[A-Z][A-z0-9_-]*" />
 					</div>
 					<div class="form-group">
 						<label for="mobilnummer">Mobilnummer</label> <input name="mobil"
@@ -41,31 +41,28 @@
 						<label for="passord">Passord</label>
 						<button type="button" class="btn btn-link password-tooltip"
 							data-toggle="tooltip" data-placement="top"
-							title="Passord skal inneholde minst 8 tegn.">
-							?</button>
-						<input name="passord" type="password" class="form-control"
-							id="passord" placeholder="Passord" required minlength="8" />
+							title="Passord skal inneholde minst 8 tegn.">?</button>
+						<input name="passord" type="password" class="form-control" id="passord"
+							placeholder="Passord" required minlength="8" data-passord1
+							oninput="checkpasswordstrength()" />
+						<small data-passord-strength></small>
 					</div>
 					<div class="form-group">
-						<label for="passord2">Repeter passord</label> <input
-							name="passord2" type="password" class="form-control is-invalid"
-							id="passord2" placeholder="Repeter passord" required
-							minlength="8" onchange="checkpassword()" /> <small
-							id="validate-passwords" class="form-text hide" style="color: red">Passwords
-							do not match.</small>
+						<label for="passord2">Repeter passord</label> <input name="passord2"
+							type="password" class="form-control is-invalid" id="passord2"
+							placeholder="Repeter passord" required minlength="8"
+							onchange="checkpassword()" data-passord2 />
+						<small class="hide" style="color: red" data-passord-error>Passord
+							stemmer ikke overens.</small>
 					</div>
 					<div class="form-group">
 						<label for="kjonn">Kjønn</label> <br /> <input type="radio"
-							name="kjonn" value="mann" required />Mann <input type="radio"
-							name="kjonn" value="kvinne" required />Kvinne
+							name="kjonn" value="mann" required />Mann
+						<input type="radio" name="kjonn" value="kvinne" required />Kvinne
 					</div>
-					<button id="modalBtn" type="button" class="btn btn-primary"
+					<button id="submitBtn" type="button" class="btn btn-primary"
 						data-toggle="modal" data-target="#confirmModal" disabled>
 						Påmeld</button>
-					<br /> <br />
-					<p>
-						Er du allerede påmeldt? <a href="logginn">Logg inn</a>
-					</p>
 					<!-- Modal -->
 					<div class="modal fade" id="confirmModal" tabindex="-1"
 						role="dialog">
@@ -82,8 +79,10 @@
 									deg på?</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary"
-										data-dismiss="modal">Avbryt</button>
-									<button type="submit" class="btn btn-primary">Påmeld</button>
+										data-dismiss="modal">
+										Avbryt</button>
+									<button type="submit" class="btn btn-primary">
+										Påmeld</button>
 								</div>
 							</div>
 						</div>
@@ -92,7 +91,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="js/validation.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
@@ -104,34 +102,6 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
-	<script type="text/javascript">
-	// enable tooltip for passsword info
-	$(document).ready(function() {
-    	$('[data-toggle="tooltip"]').tooltip({
-    	container: 'body'
-    	})
-    })
-            
-	// check form validility and enable button if valid
-	let form = document.getElementById('form')
-	form.querySelectorAll('input').forEach(input => {
-		input.addEventListener('input', () => {
-			if (input.checkValidity()) {
-				input.classList.remove('is-invalid')
-				input.classList.add('is-valid')
-			} else {
-				input.classList.remove('is-valid')
-				input.classList.add('is-invalid')
-			}
-
-			var is_valid =
-				$('.form-control').length ===
-				$('.form-control.is-valid').length &&
-				isPasswordsEqual() &&
-				document.querySelector('input[type="radio"]:checked') != null
-
-			$('#modalBtn').attr('disabled', !is_valid)
-		})
-	})</script>
+	<script src="js/validation.js" defer></script>
 </body>
 </html>

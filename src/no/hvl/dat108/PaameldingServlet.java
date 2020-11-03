@@ -37,6 +37,12 @@ public class PaameldingServlet extends HttpServlet {
 		Validering val = new Validering(request);
 
 		request.setAttribute("validering", val);
+		
+		System.out.println(val.erFornavnGyldig());
+		System.out.println(val.erEtternavnGyldig());
+		System.out.println(val.erMobilGyldig());
+		System.out.println(val.erPassordGyldig());
+		System.out.println(val.erKjonnGyldig());
 
 		if (val.erGyldig()) {
 			String hashetpw = PassordUtil.krypterPassord(request.getParameter("passord"));

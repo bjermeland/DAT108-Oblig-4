@@ -17,7 +17,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12 mt-5">
+			<div class="col-md-12 mt-5 mb-5">
 				<h4>Deltagerliste</h4>
 				<br />
 				<table class="table col-md-6">
